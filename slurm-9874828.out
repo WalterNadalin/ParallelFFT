@@ -1,0 +1,51 @@
+/var/spool/slurmd/job9874828/slurm_script: line 18: /: Is a directory
+mpicc -c src/plot_data.c -o src/plot_data.o -O0 -Wall -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c src/fft_wrapper.c -o src/fft_wrapper.o -O0 -Wall -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c src/derivative.c -o src/derivative.o -O0 -Wall -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c diffusion.c -o diffusion.o -O0 -Wall -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -o diffusion.x src/plot_data.o src/fft_wrapper.o src/derivative.o diffusion.o -L/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/lib/  -lm -lfftw3 -O0 -Wall
+mpicc -c src/plot_data.c -o src/plot_data.o -O0 -Wall -D_FFTW3_MPI -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c src/fft_wrapper.c -o src/fft_wrapper.o -O0 -Wall -D_FFTW3_MPI -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c src/derivative.c -o src/derivative.o -O0 -Wall -D_FFTW3_MPI -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -c diffusion.c -o diffusion.o -O0 -Wall -D_FFTW3_MPI -I./include/ -I/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/include/  
+mpicc -o fftw3_mpi_diffusion.x src/plot_data.o src/fft_wrapper.o src/derivative.o diffusion.o -L/m100_work/PROJECTS/spack/spack-0.14/install/linux-rhel7-power9le/gcc-8.4.0/fftw-3.3.8-hwlrarpm6cvjlukhfdowwveb7g7oqwgc/lib/  -lm -lfftw3 -lfftw3_mpi  -O0 -Wall -D_FFTW3_MPI
+--------------------------------------------------------------------------
+Your job has requested more processes than the ppr for
+this topology can support:
+
+  App: ./fftw3_mpi_diffusion.x
+  Number of procs:  512
+  PPR: 32:node
+
+Please revise the conflict and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+Your job has requested more processes than the ppr for
+this topology can support:
+
+  App: ./fftw3_mpi_diffusion.x
+  Number of procs:  1024
+  PPR: 32:node
+
+Please revise the conflict and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+Your job has requested more processes than the ppr for
+this topology can support:
+
+  App: ./fftw3_mpi_diffusion.x
+  Number of procs:  2048
+  PPR: 32:node
+
+Please revise the conflict and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+Your job has requested more processes than the ppr for
+this topology can support:
+
+  App: ./fftw3_mpi_diffusion.x
+  Number of procs:  4096
+  PPR: 32:node
+
+Please revise the conflict and try again.
+--------------------------------------------------------------------------

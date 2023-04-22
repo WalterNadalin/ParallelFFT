@@ -66,24 +66,17 @@ int main(int argc, char **argv) {
     concentration[ix] *= ss_all;
 
 #ifdef _DEBUG //  Printing initial concentration and coefficent
-	plot_data_2d("data/diffusivity", nx, ny, nz, nx_local, nx_local_offset, 2, diffusivity);
+  plot_data_2d("data/diffusivity", nx, ny, nz, nx_local, nx_local_offset, 2, diffusivity);
   plot_data_2d("data/initial_concentration", nx, ny, nz, nx_local, nx_local_offset, 2,
                concentration);
-#else
-	double time, max_time;
-	int rank;
-	
-	start = seconds();
-#endif
+#endif	
+
+  start = seconds();
 
   for (i = 0; i < local_size_grid; ++i)
     dconc[ix] = 0.0;
 
   for (istep = 1; istep <= nstep; ++istep) { // Start the dynamics
-#ifdef _DEBUG
-  	start = seconds();
-#endif
-
     for (ipol = 1; ipol <= 3; ++ipol) { // Compute derivative
       derivative(&fft_h, nx, ny, nz, L1, L2, L3, ipol, concentration, auxx);
 
@@ -101,35 +94,37 @@ int main(int argc, char **argv) {
       dconc[i] = 0.0;
     }
 
-#ifdef _DEBUG
     end = seconds();
 
+#ifdef _DEBUG
     if (istep % 30 == 1) // Check and save data
       print_info(concentration, nx, ny, nz, nx_local, nx_local_offset, L1, L2, L3, istep, start,
                  end);
 #endif
   }
-#ifndef _DEBUG
-	end = seconds();
-	
-	time = end - start;
 
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Allreduce(&time, &max_time, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);	
+#ifndef _DEBUG	
+  double time, max_time;
+  int rank;
+  
+  time = end - start;
 
-	if(!rank) {
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Allreduce(&time, &max_time, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);	
+
+  if(!rank) {
 #ifdef _FFTW3_MPI
     const char *mode = "fftw_mpi";
 #else
     const char *mode = "homemade";
 #endif  
 		
-		const char *times = "data/times.dat"; // Where to write time
-		FILE *file = fopen(times, "a");
+    const char *times = "data/times.dat"; // Where to write time
+    FILE *file = fopen(times, "a");
 		
-		fprintf(file, "%s\t%d\t%d\t%d\t%d\t%d\t%lf\t%lf\n", mode, size, nx, ny, nz, nstep, dt, max_time);
+    fprintf(file, "%s\t%d\t%d\t%d\t%d\t%d\t%lf\t%lf\n", mode, size, nx, ny, nz, nstep, dt, max_time);
 
-		fclose(file);
+    fclose(file);
   }
 #endif
 

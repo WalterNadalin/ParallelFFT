@@ -5,9 +5,9 @@
 #ifndef _FFTW_UTLITIES_
 #define _FFTW_UTLITIES_
 #include <complex.h>
-#include <fftw3.h>
 #include <math.h>
 #include <mpi.h>
+#include <fftw3.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
