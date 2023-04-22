@@ -36,9 +36,9 @@ void print_info(double *concentration, int nx, int ny, int nz, int nx_local, int
     printf("%d\t%17.15f %17.15f Elapsed time per iteration %f \n", istep, r2mean_all, ss_all,
            (end - start) / istep);
 
-  // char title[80]; // Title of the plot
-  // sprintf(title, "data/concentration_%d", 1 + (istep - 1) / 30);
-  // plot_data_2d(title, nx, ny, nz, nx_local, nx_local_offset, 2, concentration);
+  char title[80]; // Title of the plot
+  sprintf(title, "data/concentration_%d", 1 + (istep - 1) / 30);
+  plot_data_2d(title, nx, ny, nz, nx_local, nx_local_offset, 2, concentration);
 }
 
 void plot_data_2d(char *name, int nx, int ny, int nz, int nx_local, int nx_local_offset, int dir,
