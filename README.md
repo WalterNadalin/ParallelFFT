@@ -72,7 +72,7 @@ Where:
 ## Other
 Use:
 - `make clean` to clean up
-- `make [mode] flag=debug` to compile an executable which produces useful information during the execution, where `mode` again can be left black or be `fftw3_mpi`
+- `make [mode] flag=debug` to compile an executable which produces useful information during the execution, where `[mode]` can be left black or be `fftw3_mpi`
 - `make plot` to plot pretty things after the execution (you have to compile with `flag=debug` and then run for this to work)
 
 <img src="./plots/animation.gif" alt="Drawing" style="width: 500px;"/>
