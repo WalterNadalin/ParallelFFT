@@ -1,10 +1,10 @@
 # Variables for running
 prc := 4
-nx := 48
-ny := 48
+nx := 96
+ny := 96
 nz := 96
-itrs := 100
-dt := 0.002
+itrs := 1000
+dt := 0.001
 
 # Files and flags for the compiler
 CC := mpicc

@@ -66,6 +66,8 @@ int main(int argc, char **argv) {
     concentration[ix] *= ss_all;
 
 #ifdef _DEBUG //  Printing initial concentration and coefficent
+	int how_many = 10;
+	
   plot_data_2d("data/diffusivity", nx, ny, nz, nx_local, nx_local_offset, 2, diffusivity);
   plot_data_2d("data/initial_concentration", nx, ny, nz, nx_local, nx_local_offset, 2,
                concentration);
@@ -97,9 +99,9 @@ int main(int argc, char **argv) {
     end = seconds();
 
 #ifdef _DEBUG
-    if (istep % 30 == 1) // Check and save data
-      print_info(concentration, nx, ny, nz, nx_local, nx_local_offset, L1, L2, L3, istep, start,
-                 end);
+    if (istep % how_many == 1) // Check and save data
+      print_info(concentration, nx, ny, nz, nx_local, nx_local_offset, L1, L2, L3, istep, 
+      					 how_many, end - start);
 #endif
   }
 

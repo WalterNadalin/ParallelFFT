@@ -67,7 +67,7 @@ double seconds();
 int index_f(int, int, int, int, int);
 
 void plot_data_2d(char *, int, int, int, int, int, int, double *);
-void print_info(double *, int, int, int, int, int, double, double, double, int, double, double);
+void print_info(double *, int, int, int, int, int, double, double, double, int, int, double);
 
 void init_fftw(fftw_dist_handler *, int, int, int, MPI_Comm);
 void close_fftw(fftw_dist_handler *);

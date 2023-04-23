@@ -5,7 +5,7 @@
 #include "utilities.h"
 
 void print_info(double *concentration, int nx, int ny, int nz, int nx_local, int nx_local_offset,
-                double L1, double L2, double L3, int istep, double start, double end) {
+                double L1, double L2, double L3, int istep, int how_many, double time) {
   double ss = 0., r2mean = 0., ss_all, r2mean_all;
   double fac = L1 * L2 * L3 / (nx * ny * nz), rr, xx, xy, xz;
   int iz, ix, iy, rank, index;
@@ -34,10 +34,10 @@ void print_info(double *concentration, int nx, int ny, int nz, int nx_local, int
 
   if (!rank)
     printf("%d\t%17.15f %17.15f Elapsed time per iteration %f \n", istep, r2mean_all, ss_all,
-           (end - start) / istep);
+           time / istep);
 
   char title[80]; // Title of the plot
-  sprintf(title, "data/concentration_%d", 1 + (istep - 1) / 30);
+  sprintf(title, "data/concentration_%d", 1 + (istep - 1) / how_many);
   plot_data_2d(title, nx, ny, nz, nx_local, nx_local_offset, 2, concentration);
 }
 

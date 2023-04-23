@@ -22,7 +22,7 @@ set title 'Concentration in time'
 set output 'plots/animation.gif'
 frames = 17
 min = 0
-max = 0.9
+max = 0.5
 set cbrange [min: max]
 i = 1
 
