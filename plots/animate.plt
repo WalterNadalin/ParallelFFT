@@ -20,7 +20,6 @@ set term gif animate
 unset key
 set title 'Concentration in time'
 set output 'plots/animation.gif'
-frames = 17
 min = 0
 max = 0.1
 set cbrange [min: max]

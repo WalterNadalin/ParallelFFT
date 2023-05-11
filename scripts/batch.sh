@@ -40,7 +40,7 @@ prc=32
 
 for value in {1..4}
 do
-        mpirun -np $prc -npernode 32 ./fftw3_mpi_diffusion.x $nstep $nx $ny $nz $dt
+        mpirun -np $prc -npernode 32 ./fftw3_mpidiffusion.x $nstep $nx $ny $nz $dt
         ((prc*=2))
 done
 

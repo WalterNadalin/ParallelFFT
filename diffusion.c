@@ -16,10 +16,11 @@ int main(int argc, char **argv) {
   double start, end; // For time measures
   double fxconc, fyconc, fzconc, fxdiff, fydiff, fzdiff, fac, ss, ss_all, xx, xy, xz;
   double *diffusivity, *concentration, *dconc, *auxx, *auxy;
-  int size, i, ix, iy, iz, ipol, istep, index;
+  int rank, size, i, ix, iy, iz, ipol, istep, index;
   fftw_dist_handler fft_h;
 
   MPI_Comm_size(MPI_COMM_WORLD, &size); // Initialization of the MPI environment
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   init_fftw(&fft_h, nx, ny, nz, MPI_COMM_WORLD); // Initialize the fftw system and local dimension
 
   const int nx_local = fft_h.local_nx, nx_local_offset = fft_h.local_nx_offset,
@@ -71,6 +72,8 @@ int main(int argc, char **argv) {
   plot_data_2d("data/diffusivity", nx, ny, nz, nx_local, nx_local_offset, 2, diffusivity);
   plot_data_2d("data/initial_concentration", nx, ny, nz, nx_local, nx_local_offset, 2,
                concentration);
+               
+ 	if(!rank) printf("Iteration\tMean radius\t\tNormalization\t\tTime per iteration\t\n");
 #endif	
 
   start = seconds();
@@ -99,19 +102,16 @@ int main(int argc, char **argv) {
     end = seconds();
 
 #ifdef _DEBUG
-    if (istep % how_many == 1) // Check and save data
+    if (istep % how_many == 5) // Check and save data
       print_info(concentration, nx, ny, nz, nx_local, nx_local_offset, L1, L2, L3, istep, 
       					 how_many, end - start);
 #endif
   }
-
-#ifndef _DEBUG	
+	
   double time, max_time;
-  int rank;
   
   time = end - start;
 
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Allreduce(&time, &max_time, 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD);	
 
   if(!rank) {
@@ -123,12 +123,16 @@ int main(int argc, char **argv) {
 		
     const char *times = "data/times.dat"; // Where to write time
     FILE *file = fopen(times, "a");
+    
+    printf("\n\tVersion: %s\n\tDimension of the grid: %d\u00d7%d\u00d7%d\
+    			  \n\tNumber of iterations: %d\n\tNumber of processes: %d\
+    			  \n\n\tTime per iteration: %lf\n\tTotal time: %lf\n\n", 
+    			  mode, nx, ny, nz, nstep, size, max_time / nstep, max_time);
 		
     fprintf(file, "%s\t%d\t%d\t%d\t%d\t%d\t%lf\t%lf\n", mode, size, nx, ny, nz, nstep, dt, max_time);
 
     fclose(file);
   }
-#endif
 
   close_fftw(&fft_h);
   free(diffusivity);

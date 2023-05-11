@@ -33,7 +33,7 @@ void print_info(double *concentration, int nx, int ny, int nz, int nx_local, int
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (!rank)
-    printf("%d\t%17.15f %17.15f Elapsed time per iteration %f \n", istep, r2mean_all, ss_all,
+    printf("%d\t\t\t%17.15f\t%17.15f\t%f\t\n", istep, r2mean_all, ss_all,
            time / istep);
 
   char title[80]; // Title of the plot
