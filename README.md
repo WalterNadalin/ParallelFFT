@@ -41,7 +41,8 @@ in the direct space can be associated to the $iq[\cdot]$ operator in the recipro
 - [**FFTW library**](http://www.fftw.org/)
 - [**gnuplot**](http://www.gnuplot.info/)
 
-## Compilation
+### Compilation
+---
 Use:
 
 ```make [mode]```
@@ -52,7 +53,8 @@ with `[mode]`:
 
 This will produce the `./[version]diffusion.x` executable
 
-## Execution
+### Execution
+---
 Use:
 ```
 make [version]run [iters=%d] [nx=%d] [ny=%d] [nz=%d] [dt=%d] [prc=%d]
@@ -79,7 +81,8 @@ make [version]run debug=yes
 
 which will compile (if necessary) and run immediately after.
 
-## Other
+### Plot
+---
 Use `make plot` to plot pretty things
 
 <img src="./plots/animation.gif" alt="Drawing" style="width: 500px;"/>
