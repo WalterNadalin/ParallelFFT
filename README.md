@@ -80,8 +80,7 @@ make [version]run debug=yes
 which will compile (if necessary) and run immediately after.
 
 ## Other
-Use:
--`make plot` to plot pretty things
+Use `make plot` to plot pretty things
 
 <img src="./plots/animation.gif" alt="Drawing" style="width: 500px;"/>
 
