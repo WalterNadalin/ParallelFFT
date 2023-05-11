@@ -47,33 +47,41 @@ Use:
 ```make [mode]```
 
 with `[mode]`:
-- left blank to compile an 'homemade' version (that is, a version which exploits only locally the FFTW functions and handles explicitly the communication between processes) of the parallel FFTW3 MPI routine to execute a FFT on a 3D grid, will produce *./diffusion.x* executable
-- `fftw3_mpi` to compile the FFTW3 MPI routine which runs on a 3D grid, will produce *./diffusion_fftw3_mpi.x* executable
+- left blank to compile an homemade version (that is, a version which exploits only locally the FFTW functions and handles explicitly the communication between processes) to execute a FFT on a 3D grid
+- `fftw3_mpi` to compile the FFTW routine which runs in parallel on a distributed 3D grid
+
+This will produce the `./[version]diffusion.x` executable
 
 ## Execution
 Use:
 ```
-make run [iters=%d] [nx=%d] [ny=%d] [nz=%d] [dt=%d] [prc=%d]
+make [version]run [iters=%d] [nx=%d] [ny=%d] [nz=%d] [dt=%d] [prc=%d]
 ```
-to run the 'homemade' version, requires `diffusion.x` to be present. 
-
-Use:
-```
-make fftw3_mpi_run [iters=%d] [nx=%d] [ny=%d] [nz=%d] [dt=%d] [prc=%d]
-```
-to run the library version, requires `diffusion_fftw3_mpi.x` to be present. 
-
-Where:
+where:
 - `nx`, `ny` and `nz` dimensions of the grid
 - `iters` number of iterations
 - `dt` dimension of the single iteration time step
 - `prc` number of processes
 
+### Test
+---
+To **test** it is possible to pass the `debug=yes` flag while making
+
+```bash
+make [version] debug=yes
+```
+
+and then run the `[version]multiplication_debug.x` executable using `mpirun`. It is also supported the command:
+
+```bash
+make [version]run debug=yes
+```
+
+which will compile (if necessary) and run immediately after.
+
 ## Other
 Use:
-- `make clean` to clean up
-- `make [mode] flag=debug` to compile an executable which produces useful information during the execution, where `[mode]` can be left black or be `fftw3_mpi`
-- `make plot` to plot pretty things after the execution (you have to compile with `flag=debug` and then run for this to work)
+-`make plot` to plot pretty things
 
 <img src="./plots/animation.gif" alt="Drawing" style="width: 500px;"/>
 
